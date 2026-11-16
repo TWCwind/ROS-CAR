@@ -426,3 +426,9 @@
 - 修复同步到 `/home/wheeltec/ROSCAR-red` 后，xfyun_speech 原生 Humble 构建成功，协议和 WebSocket 超时恢复共 5 项测试通过。为避免与他人正在调整的跟随会话耦合，语音改为独立 `roscar-voice` tmux 会话；未重启或修改跟随进程。
 - 真人连续完成两轮完整链路：“你是人类吗？”与“你好吗？”均收到硬件唤醒、LISTENING、ASR_TEXT、DeepSeek ANSWER、TTS `SPEAKING→IDLE`，用户现场听到播报，日志未再出现发送超时。中间两次只唤醒未发出超过阈值的语音被安全丢弃。
 - `scripts/run_voice_assistant.sh` 从硬编码 `enable_tts:=false` 改为默认开启，可用 `VOICE_TTS_ENABLED=false` 恢复纯文本模式；配置固定已验证 USB 播放设备。同步更新 README。未修改跟随代码或参数。
+
+## 2026-11-16：智能网联汽车赛项路径跟踪参考
+
+- 根据用户选择的虚拟仿真赛道，新增独立的 `competition/icv/` 目录；从 `pb2025_sentry_nav` 的 Apache 2.0 子模块中移植前视距离和前视点选择思路，补充汽车自行车模型的正向转向角计算。
+- 保留原作者、原提交和许可说明；原控制器面向全向哨兵机器人，未复制其 ROS/Nav2 运行框架或全向速度输出。本参考尚未连接赛事仿真平台，不代表完整参赛算法。
+- 后续 Codex 任务提示保存在 `competition/icv/CODEX_PROMPT.md`。本轮仅处理仓库代码与文档，未启动小车或仿真平台。
