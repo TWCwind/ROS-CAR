@@ -9,4 +9,15 @@
 - 原代码：`src/omni_pid_pursuit_controller.cpp` 中的 `getLookAheadDistance`、`getLookAheadPoint`、`circleSegmentIntersection`
 - 原作者版权：Copyright 2025 Lihan Chen；原控制器采用 Apache License 2.0，许可文本见本目录 `LICENSE`。
 
-输入的路径应按行驶方向排序，且已经转换到车体坐标系（x 向前、y 向左，单位为米）。这份代码只给出前视点和**正向行驶**的转向角参考，尚未接入赛事仿真平台，也没有完成油门、制动、避障、信号灯、泊车或完整赛题。实际使用前，须按赛事 API、车辆轴距、转向范围及场景规则适配并验证。不要把这个目录接入现有室内人体跟随启动链。
+`path_tracking.py` 的输入路径应按行驶方向排序，且已经转换到车体坐标系（x 向前、y 向左，单位为米）；它只给出前视点和**正向行驶**的转向角参考。目录中的其他文件提供离线速度控制与仿真，但尚未接入赛事平台，也没有完成避障、信号灯、泊车或完整赛题。实际使用前，须按赛事 API、车辆轴距、转向范围及场景规则适配并验证。不要把这个目录接入现有室内人体跟随启动链。
+
+## 第一个离线闭环
+
+`controller.py` 将世界坐标路线和车辆状态转换为前视目标，并输出内部约定的转向、油门、制动命令。`offline_demo.py` 使用简化车辆模型接收这些命令并更新车辆状态，可运行直道与半径 50 m 弯道示例：
+
+```powershell
+python -B competition/icv/offline_demo.py
+```
+
+它是算法开发用的离线闭环，尚未接入赛事仿真器，也不代表正式场景得分。赛事字段、内部约定与所需平台资料见 [PLATFORM_GAP.md](PLATFORM_GAP.md)。
+
